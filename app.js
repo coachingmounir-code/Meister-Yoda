@@ -92,35 +92,70 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ==========================================================================
-  // 3. HERO FLOATING PANELS PARALLAX & MOUSE FLOAT
+  // 3. MEISTER YODA MURAL ENGINE (PARTIKEL, PARALLAX & FOCUS-MODUS)
   // ==========================================================================
-  const heroVisuals = document.querySelectorAll('.hero-visual');
   const heroSection = document.getElementById('hero');
+  const heroVisuals = document.querySelectorAll('.hero-visual');
+  const muralLayers = document.querySelectorAll('.mural-canvas-layer');
+  const muralAura = document.querySelector('.mural-living-aura');
+  const heroTextCard = document.getElementById('hero-text-card');
+  const toggleMuralBtn = document.getElementById('toggle-mural-view');
+  const forceCanvas = document.getElementById('force-canvas');
 
+  // --- A. Focus Modus Toggle: Muster ungestört betrachten ---
+  if (toggleMuralBtn && heroTextCard) {
+    toggleMuralBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isFocused = heroTextCard.classList.toggle('focus-mural');
+      toggleMuralBtn.textContent = isFocused ? '✕ TEXT WIEDERHERSTELLEN' : '👁 MUSTER IM FOKUS';
+      playSoundChime(isFocused ? 528 : 432, 0.3);
+    });
+
+    // Klick auf das Bild hebt den Focus-Modus wieder auf
+    if (heroSection) {
+      heroSection.addEventListener('click', (e) => {
+        if (heroTextCard.classList.contains('focus-mural') && !e.target.closest('#hero-text-card')) {
+          heroTextCard.classList.remove('focus-mural');
+          toggleMuralBtn.textContent = '👁 MUSTER IM FOKUS';
+          playSoundChime(432, 0.2);
+        }
+      });
+    }
+  }
+
+  // --- B. 3D Parallax & Mouse Flow auf dem Meister-Mural ---
   let mouseX = 0;
   let mouseY = 0;
   let currentX = 0;
   let currentY = 0;
 
-  if (heroSection && heroVisuals.length > 0 && window.innerWidth > 991) {
+  if (heroSection && window.innerWidth > 991) {
     window.addEventListener('mousemove', (e) => {
-      mouseX = (e.clientX / window.innerWidth - 0.5) * 25;
-      mouseY = (e.clientY / window.innerHeight - 0.5) * 25;
+      mouseX = (e.clientX / window.innerWidth - 0.5) * 30;
+      mouseY = (e.clientY / window.innerHeight - 0.5) * 30;
     });
 
-    // Sanfte Parallax-Animation per requestAnimationFrame
     function animateParallax() {
-      currentX += (mouseX - currentX) * 0.06;
-      currentY += (mouseY - currentY) * 0.06;
+      currentX += (mouseX - currentX) * 0.05;
+      currentY += (mouseY - currentY) * 0.05;
 
       const scrollY = window.pageYOffset;
 
+      // Mural Layer leicht entgegensteuern für erhabene Tiefe
+      muralLayers.forEach(layer => {
+        layer.style.transform = `translate3d(${-currentX * 0.4}px, ${-currentY * 0.4 - scrollY * 0.04}px, 0) scale(1.03)`;
+      });
+
+      if (muralAura) {
+        muralAura.style.transform = `translate(calc(-50% + ${currentX * 0.6}px), calc(-50% + ${currentY * 0.6}px))`;
+      }
+
+      // 4 Floating Accent Panels
       heroVisuals.forEach((visual, index) => {
         const speed = parseFloat(visual.getAttribute('data-speed')) || 0.05;
         const depthFactor = (index + 1) * 0.35;
         const xOffset = currentX * depthFactor;
         const yOffset = currentY * depthFactor - (scrollY * speed);
-
         visual.style.transform = `translate3d(${xOffset}px, ${yOffset}px, 0)`;
       });
 
@@ -128,6 +163,124 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     animateParallax();
+  }
+
+  // --- C. Lebendiger Macht-Partikel-Fluss (Living Force Canvas) ---
+  if (forceCanvas && forceCanvas.getContext) {
+    const ctx = forceCanvas.getContext('2d');
+    let width, height;
+    let particles = [];
+    const PARTICLE_COUNT = 55;
+
+    function resizeCanvas() {
+      width = forceCanvas.width = heroSection.offsetWidth;
+      height = forceCanvas.height = heroSection.offsetHeight;
+    }
+
+    window.addEventListener('resize', resizeCanvas);
+    resizeCanvas();
+
+    class ForceParticle {
+      constructor() {
+        this.reset(true);
+      }
+
+      reset(init = false) {
+        // Starten vorzugsweise in der Mitte um Meister Yoda herum
+        const centerX = width * 0.5;
+        const centerY = height * 0.45;
+        const angle = Math.random() * Math.PI * 2;
+        const radius = init ? Math.random() * (width * 0.45) : (50 + Math.random() * 120);
+
+        this.x = centerX + Math.cos(angle) * radius;
+        this.y = centerY + Math.sin(angle) * radius;
+        this.baseX = this.x;
+        this.baseY = this.y;
+
+        this.size = Math.random() * 2.5 + 0.8;
+        this.speed = Math.random() * 0.6 + 0.2;
+        this.angle = angle;
+        this.angularSpeed = (Math.random() - 0.5) * 0.012;
+        this.radialSpeed = (Math.random() - 0.5) * 0.3;
+        this.waveFreq = Math.random() * 0.02 + 0.005;
+        this.waveAmp = Math.random() * 25 + 10;
+        this.time = Math.random() * 100;
+        this.alpha = Math.random() * 0.6 + 0.2;
+        
+        // Farbe: Gold oder leuchtendes Kyber-Smaragdgrün
+        this.isGold = Math.random() > 0.45;
+      }
+
+      update() {
+        this.time += 0.03;
+        this.angle += this.angularSpeed;
+
+        // Sanfte orbitale Bewegung mit Wellenlinie entlang des Musters
+        const centerX = width * 0.5;
+        const centerY = height * 0.45;
+        const currentDist = Math.hypot(this.x - centerX, this.y - centerY);
+
+        const targetDist = currentDist + this.radialSpeed + Math.sin(this.time * this.waveFreq) * 0.5;
+        this.x = centerX + Math.cos(this.angle) * targetDist;
+        this.y = centerY + Math.sin(this.angle) * targetDist + Math.sin(this.time) * (this.waveAmp * 0.08);
+
+        // Sanfte Interaktion mit dem Mauszeiger
+        const dx = (mouseX * (width / 30) + centerX) - this.x;
+        const dy = (mouseY * (height / 30) + centerY) - this.y;
+        const distToMouse = Math.hypot(dx, dy);
+
+        if (distToMouse < 180) {
+          const pushForce = (1 - distToMouse / 180) * 2;
+          this.x -= (dx / distToMouse) * pushForce;
+          this.y -= (dy / distToMouse) * pushForce;
+        }
+
+        // Wenn Partikel zu weit herausdriftet, sanft wiederkehren lassen
+        if (this.x < -40 || this.x > width + 40 || this.y < -40 || this.y > height + 40) {
+          this.reset();
+        }
+      }
+
+      draw() {
+        const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+        ctx.save();
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+
+        if (this.isGold) {
+          ctx.fillStyle = isDark 
+            ? `rgba(229, 185, 78, ${this.alpha * 0.85})` 
+            : `rgba(194, 153, 56, ${this.alpha * 0.75})`;
+          ctx.shadowColor = 'rgba(229, 185, 78, 0.6)';
+        } else {
+          ctx.fillStyle = isDark 
+            ? `rgba(74, 222, 128, ${this.alpha * 0.95})` 
+            : `rgba(46, 90, 54, ${this.alpha * 0.7})`;
+          ctx.shadowColor = 'rgba(74, 222, 128, 0.7)';
+        }
+
+        ctx.shadowBlur = isDark ? 8 : 4;
+        ctx.fill();
+        ctx.restore();
+      }
+    }
+
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      particles.push(new ForceParticle());
+    }
+
+    function renderForceParticles() {
+      ctx.clearRect(0, 0, width, height);
+
+      particles.forEach(p => {
+        p.update();
+        p.draw();
+      });
+
+      requestAnimationFrame(renderForceParticles);
+    }
+
+    renderForceParticles();
   }
 
 

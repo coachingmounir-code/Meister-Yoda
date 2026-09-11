@@ -462,25 +462,132 @@ button {
 }
 
 /* --------------------------------------------------------------------------
-   6. HERO SECTION (DAS ESTELLE SCOTTSDALE MEISTERWERK)
-   Zentrierter Text, gerahmt von 4 versetzten Floating Panels
+   6. HERO SECTION: MEISTER YODA & DAS OMNIPRÄSENTE MURAL-MUSTER
+   Meister Yoda und das florale Art-Nouveau-Linienmuster verschmelzen
+   zu einer lebendigen, omnipräsenten, animierten Einheit.
    -------------------------------------------------------------------------- */
 .hero-section {
   position: relative;
-  min-height: 94vh;
+  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 4rem 1.5rem;
+  padding: 5rem 1.5rem 6rem;
   overflow: hidden;
 }
 
-/* 4 Schwebende Asymmetrische Visual-Cards */
+/* Omnipräsente Meister Yoda & Botanical Mural Stage */
+.hero-mural-stage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.mural-canvas-layer {
+  position: absolute;
+  inset: -5%;
+  width: 110%;
+  height: 110%;
+  background-size: cover;
+  background-position: center 36%;
+  background-repeat: no-repeat;
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s ease-out;
+  animation: yodaMuralBreathe 9s ease-in-out infinite alternate;
+  will-change: transform, opacity;
+}
+
+/* Tag-Modus: Organisches Moosgrün auf warmem Creme-Pergament */
+[data-theme="light"] .mural-day-layer {
+  opacity: 0.95;
+  mix-blend-mode: multiply;
+  filter: contrast(1.06) brightness(0.98);
+}
+
+[data-theme="light"] .mural-night-layer {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Nacht-Modus: Lumineszierendes Smaragd- und Goldleuchten auf Mitternachtsobsidian */
+[data-theme="dark"] .mural-day-layer {
+  opacity: 0;
+  pointer-events: none;
+}
+
+[data-theme="dark"] .mural-night-layer {
+  opacity: 0.96;
+  mix-blend-mode: screen;
+  filter: drop-shadow(0 0 45px rgba(74, 222, 128, 0.35)) contrast(1.15) brightness(1.05);
+}
+
+/* Lebendige, meditative Atem-Animation des gesamten Meister-Musters */
+@keyframes yodaMuralBreathe {
+  0% {
+    transform: scale(1.0) translateY(0);
+  }
+  50% {
+    transform: scale(1.035) translateY(-8px);
+  }
+  100% {
+    transform: scale(1.0) translateY(0);
+  }
+}
+
+/* Interaktiver Partikel-Canvas (Gold & Smaragd Staub der Macht) */
+.force-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+}
+
+/* Sanft pulsierende Licht-Aura um Meister Yodas Meditationssitz */
+.mural-living-aura {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 650px;
+  height: 650px;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-green-glow) 0%, rgba(229, 185, 78, 0.12) 40%, transparent 72%);
+  z-index: 2;
+  animation: auraBreath 6s ease-in-out infinite alternate;
+  pointer-events: none;
+}
+
+@keyframes auraBreath {
+  0% {
+    transform: translate(-50%, -50%) scale(0.88);
+    opacity: 0.35;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(1.15);
+    opacity: 0.85;
+  }
+}
+
+/* Sanfter Vignette-Verlauf: Verschmilzt die Bildränder nahtlos mit der Seite */
+.mural-edge-vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 35%, var(--bg-primary) 95%);
+  z-index: 4;
+  pointer-events: none;
+}
+
+/* 4 Schwebende Asymmetrische Visual-Cards (Dezent am Außenrand) */
 .hero-visual-wrapper {
   position: absolute;
   inset: 0;
   pointer-events: none;
-  z-index: 1;
+  z-index: 5;
 }
 
 .hero-visual {
@@ -489,24 +596,25 @@ button {
   background-position: center;
   background-repeat: no-repeat;
   border-radius: 2px;
-  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.18);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
   border: 1px solid var(--border-subtle);
   overflow: hidden;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, opacity 0.4s ease;
   pointer-events: auto;
+  opacity: 0.75;
 }
 
 .hero-visual:hover {
-  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.28);
-  transform: translateY(-6px) scale(1.02) !important;
+  opacity: 1;
+  box-shadow: 0 28px 56px rgba(0, 0, 0, 0.28);
+  transform: translateY(-8px) scale(1.03) !important;
 }
 
-/* Bildkarten-Beschriftung (Estelle Monospace Detail) */
 .visual-caption {
   position: absolute;
   bottom: 0.75rem;
   left: 0.75rem;
-  background: rgba(13, 19, 12, 0.75);
+  background: rgba(13, 19, 12, 0.8);
   color: #FAF6EE;
   font-family: var(--font-mono);
   font-size: 0.58rem;
@@ -516,56 +624,90 @@ button {
   border-radius: 1px;
 }
 
-/* Positionen der 4 Visual Panels (Estelle Scottsdale Layout) */
+/* Positionen der dezenten Floating Cards */
 .visual-top-left {
-  top: 8%;
-  left: 4%;
-  width: 22%;
-  height: 380px;
-  max-width: 320px;
+  top: 7%;
+  left: 3%;
+  width: 17%;
+  height: 290px;
+  max-width: 250px;
 }
 
 .visual-bottom-left {
-  bottom: 6%;
-  left: 7%;
-  width: 19%;
-  height: 320px;
-  max-width: 270px;
+  bottom: 5%;
+  left: 4%;
+  width: 16%;
+  height: 270px;
+  max-width: 230px;
 }
 
 .visual-top-right {
-  top: 7%;
-  right: 4%;
-  width: 23%;
-  height: 400px;
-  max-width: 330px;
+  top: 6%;
+  right: 3%;
+  width: 17%;
+  height: 300px;
+  max-width: 260px;
 }
 
 .visual-bottom-right {
-  bottom: 8%;
-  right: 6%;
-  width: 21%;
-  height: 340px;
-  max-width: 290px;
+  bottom: 7%;
+  right: 4%;
+  width: 16%;
+  height: 280px;
+  max-width: 240px;
 }
 
-/* Zentrierter Editorial Text */
+/* Zentrierter Editorial Text mit Edlem Glasmorphismus */
 .hero-text-container {
   position: relative;
   z-index: 10;
-  max-width: 680px;
+  max-width: 660px;
   margin: 0 auto;
   text-align: center;
   pointer-events: auto;
-  padding: 2.5rem 2rem;
-  background: radial-gradient(ellipse at center, var(--bg-primary) 55%, transparent 100%);
-  border-radius: 16px;
+  padding: 3rem 2.5rem;
+  background: rgba(250, 246, 238, 0.72);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  box-shadow: 0 20px 45px rgba(28, 39, 23, 0.08);
+  transition: opacity 0.5s ease, transform 0.5s ease, border-color 0.4s ease;
+}
+
+[data-theme="dark"] .hero-text-container {
+  background: rgba(13, 19, 12, 0.75);
+  border-color: rgba(247, 244, 235, 0.16);
+  box-shadow: 0 24px 55px rgba(0, 0, 0, 0.5);
+}
+
+/* Modus: Wenn der Nutzer das Meister-Muster ungestört betrachten möchte */
+.hero-text-container.focus-mural {
+  opacity: 0.12;
+  transform: scale(0.96);
+  pointer-events: none;
+}
+
+.hero-badge-wrap {
+  margin-bottom: 1.5rem;
+}
+
+.mural-harmony-badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
+  color: var(--accent-gold);
+  padding: 0.35rem 0.95rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  background: var(--card-bg);
+  display: inline-block;
 }
 
 .hero-quote-block {
   display: flex;
   flex-direction: column;
-  gap: 2.2rem;
+  gap: 2rem;
 }
 
 .hero-stanza {
@@ -597,7 +739,7 @@ button {
   justify-content: center;
   align-items: center;
   gap: 1.25rem;
-  margin-top: 1rem;
+  margin-top: 0.75rem;
   flex-wrap: wrap;
 }
 
@@ -607,7 +749,10 @@ button {
 }
 
 .hero-btn-sub {
-  padding: 1rem 2rem;
+  padding: 1rem 1.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .hero-scroll-indicator {

@@ -139,35 +139,54 @@
          Zentrierter poetischer Textblock gerahmt von 4 versetzten
          schwebenden Visual-Cards mit Parallax-Effekt.
          ======================================================== -->
+    <!-- ========================================================
+         HERO SECTION: MEISTER YODA & DAS MURAL-MUSTER (OMNIPRÄSENT)
+         Meister Yoda und das Estelle-inspirierte organische Linienmuster
+         verschmelzen zu einer lebendigen, animierten Einheit.
+         ======================================================== -->
     <section class="hero-section" id="hero">
       
-      <!-- 4 Asymmetrische Floating Visual Panels (Estelle Scottsdale Layout) -->
+      <!-- Omnipräsentes Meister Yoda & Botanical Linienmuster Stage -->
+      <div class="hero-mural-stage" id="hero-mural-stage">
+        <!-- Tag-Mural (Creme & Moosgrün) -->
+        <div class="mural-canvas-layer mural-day-layer" style="background-image: url('assets/images/yoda-mural-day.jpg');" aria-label="Meister Yoda im Estelle-Linienmuster (Tag)"></div>
+        
+        <!-- Nacht-Mural (Obsidian & Lumineszierendes Gold/Smaragd) -->
+        <div class="mural-canvas-layer mural-night-layer" style="background-image: url('assets/images/yoda-mural-night.jpg');" aria-label="Meister Yoda im leuchtenden Linienmuster (Nacht)"></div>
+        
+        <!-- Interaktives Lebendiges Macht-Partikel-Canvas (Gold & Smaragd Staub) -->
+        <canvas id="force-canvas" class="force-canvas" aria-hidden="true"></canvas>
+
+        <!-- Animierte Lichtwellen-Aura um Meister Yoda -->
+        <div class="mural-living-aura" aria-hidden="true"></div>
+
+        <!-- Sanfter Verlauf zur nahtlosen Hintergrund-Verschmelzung -->
+        <div class="mural-edge-vignette" aria-hidden="true"></div>
+      </div>
+
+      <!-- 4 Floating Accent Panels (Subtil am Rand mitschwebend) -->
       <div class="hero-visual-wrapper" aria-hidden="true">
-        <!-- Panel 1: Oben links - Meister Yoda Skulptur im Dhyana-Sitz -->
         <div class="hero-visual visual-top-left" data-speed="0.08" style="background-image: url('assets/images/yoda-statue.jpg');">
           <div class="visual-caption">I. DER MEISTER</div>
         </div>
-
-        <!-- Panel 2: Unten links - Uralter Dagobah-Hain mit Lichtstrahlen -->
         <div class="hero-visual visual-bottom-left" data-speed="-0.05" style="background-image: url('assets/images/ancient-grove.jpg');">
           <div class="visual-caption">II. DIE ZUFLUCHT</div>
         </div>
-
-        <!-- Panel 3: Oben rechts - Schwebende Kiesel im Gleichgewicht -->
         <div class="hero-visual visual-top-right" data-speed="0.12" style="background-image: url('assets/images/floating-stones.jpg');">
           <div class="visual-caption">III. SCHWERELOS</div>
         </div>
-
-        <!-- Panel 4: Unten rechts - Hände mit leuchtender Lebensmacht -->
         <div class="hero-visual visual-bottom-right" data-speed="-0.09" style="background-image: url('assets/images/force-hands.jpg');">
           <div class="visual-caption">IV. DIE LEBENDIGE MACHT</div>
         </div>
       </div>
 
       <!-- Zentrierter Poetischer Editorial-Textblock (Estelle Style) -->
-      <div class="hero-text-container">
+      <div class="hero-text-container" id="hero-text-card">
+        <div class="hero-badge-wrap">
+          <span class="mural-harmony-badge">✦ MEISTER YODA & DIE LEBENDIGE MACHT ✦</span>
+        </div>
+
         <div class="hero-quote-block">
-          
           <p class="hero-stanza u-fade-in delay-1">
             Nicht bloß eine Übung dies ist.<br>
             Ein Erwachen im tiefen Kern des Seins.<br>
@@ -184,22 +203,17 @@
             </span>
           </p>
 
-          <p class="hero-stanza u-fade-in delay-3">
-            Geduld du haben musst.<br>
-            Verlernen, was du einst gelernt hast.<br>
-            Kein Versuchen existiert hier.
-          </p>
-
-          <p class="hero-stanza highlight-stanza u-fade-in delay-4">
+          <p class="hero-stanza highlight-stanza u-fade-in delay-3">
             Ein Pfad, der dich nicht belehren will —<br>
             sondern dich sanft an dein wahres Wesen erinnert.
           </p>
 
-          <div class="hero-actions u-fade-in delay-5">
+          <div class="hero-actions u-fade-in delay-4">
             <a href="#breath-meditation" class="primary-button hero-btn">DEN PFAD BESCHREITEN</a>
-            <a href="#oracle" class="secondary-button hero-btn-sub">WEISHEIT EMPFANGEN</a>
+            <button id="toggle-mural-view" class="secondary-button hero-btn-sub" title="Muster & Meister Yoda ohne Text betrachten">
+              👁 MUSTER IM FOKUS
+            </button>
           </div>
-
         </div>
       </div>
 
