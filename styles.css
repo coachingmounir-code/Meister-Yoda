@@ -1,0 +1,1485 @@
+/* ==========================================================================
+   MEISTER YODA MEDITATION GUIDE – STYLESHEET
+   Inspiriert von der Luxus-Ästhetik von Estelle Scottsdale
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS CUSTOM PROPERTIES (DESIGN TOKENS & FARBTHEMEN)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Day Mode (Standard) - Warme Creme- und Pergamenttöne, Moos & Salbei */
+  --bg-primary: #FAF6EE;
+  --bg-secondary: #F2ECE0;
+  --bg-tertiary: #E8E0D0;
+  --text-primary: #1C2717;      /* Tiefes Wald- und Moosgrün */
+  --text-secondary: #57634C;    /* Weiches Salbeioliv */
+  --text-muted: #849177;
+  
+  --accent-gold: #C29938;       /* Sanftes Macht-Gold */
+  --accent-gold-light: #F4E8C1;
+  --accent-green: #375932;      /* Lebendige Macht */
+  --accent-green-glow: rgba(74, 222, 128, 0.25);
+  
+  --border-subtle: rgba(28, 39, 23, 0.12);
+  --border-strong: rgba(28, 39, 23, 0.3);
+  --card-bg: rgba(255, 255, 255, 0.65);
+  --card-shadow: 0 20px 40px rgba(28, 39, 23, 0.06);
+  --nav-backdrop: rgba(250, 246, 238, 0.85);
+
+  --switch-bg: #E4DCCB;
+  --switch-handle: #1C2717;
+  --toggle-pos: 3px;
+
+  /* Typografie */
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Plus Jakarta Sans', -apple-system, sans-serif;
+  --font-mono: 'Space Mono', monospace;
+
+  /* Animationen */
+  --transition-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  --transition-fast: all 0.25s ease;
+}
+
+/* Night Mode - Kosmische Dagobah-Nachtstille & Luminous Force Glow */
+[data-theme="dark"] {
+  --bg-primary: #0D130C;        /* Tiefste Nacht im Dagobah-Wald */
+  --bg-secondary: #141C12;
+  --bg-tertiary: #1B2618;
+  --text-primary: #F7F4EB;      /* Helles Pergament / Sternenlicht */
+  --text-secondary: #A2AD97;    /* Nebeliges Salbei */
+  --text-muted: #6B7760;
+
+  --accent-gold: #E5B94E;
+  --accent-gold-light: rgba(229, 185, 78, 0.15);
+  --accent-green: #4ADE80;      /* Kyber-Grün */
+  --accent-green-glow: rgba(74, 222, 128, 0.35);
+
+  --border-subtle: rgba(247, 244, 235, 0.12);
+  --border-strong: rgba(247, 244, 235, 0.28);
+  --card-bg: rgba(20, 28, 18, 0.7);
+  --card-shadow: 0 24px 50px rgba(0, 0, 0, 0.45);
+  --nav-backdrop: rgba(13, 19, 12, 0.88);
+
+  --switch-bg: #273623;
+  --switch-handle: #E5B94E;
+  --toggle-pos: 25px;
+}
+
+/* --------------------------------------------------------------------------
+   2. RESET & BASIS
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.65;
+  font-weight: 300;
+  transition: background-color 0.6s cubic-bezier(0.16, 1, 0.3, 1), color 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow-x: hidden;
+  position: relative;
+}
+
+::selection {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: var(--transition-fast);
+}
+
+button {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-family: inherit;
+  color: inherit;
+}
+
+.container {
+  width: 100%;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.font-italic {
+  font-style: italic;
+}
+
+/* --------------------------------------------------------------------------
+   3. TYPOGRAFIE & UTILITY STYLES
+   -------------------------------------------------------------------------- */
+.section-tag {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--accent-gold);
+  margin-bottom: 1rem;
+  font-weight: 700;
+}
+
+.tag-light {
+  color: var(--accent-gold);
+}
+
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 3.8rem);
+  font-weight: 400;
+  line-height: 1.15;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+}
+
+.section-desc {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  max-width: 650px;
+  margin: 0 auto 3.5rem;
+  font-style: italic;
+  font-family: var(--font-display);
+  line-height: 1.6;
+}
+
+/* Buttons im Estelle Scottsdale Stil */
+.primary-button {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.75rem;
+  color: var(--text-primary);
+  border: 1px solid var(--text-primary);
+  background: transparent;
+  transition: var(--transition-smooth);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.primary-button:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+.secondary-button {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 0.85rem 1.75rem;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  background: var(--card-bg);
+  transition: var(--transition-smooth);
+  backdrop-filter: blur(8px);
+}
+
+.secondary-button:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+.ghost-button {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding: 0.6rem 1.2rem;
+  color: var(--text-muted);
+  transition: var(--transition-fast);
+}
+
+.ghost-button:hover {
+  color: var(--text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   4. TOP MURAL INTRO BANNER (Estelle "Meet Estelle" Touch)
+   -------------------------------------------------------------------------- */
+.mural-banner {
+  width: 100%;
+  padding: 2.2rem 2rem 1.8rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border-subtle);
+  background-color: var(--bg-secondary);
+  transition: background-color 0.5s ease;
+}
+
+.mural-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  color: var(--text-muted);
+  margin-bottom: 0.4rem;
+}
+
+.mural-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 300;
+  letter-spacing: 0.04em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.6rem;
+  line-height: 1.1;
+}
+
+.mural-word {
+  display: inline-block;
+}
+
+.mural-tagline {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.3em;
+  color: var(--accent-gold);
+  margin-top: 0.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   5. STICKY LUXURY NAVIGATION (Estelle Scottsdale Layout)
+   -------------------------------------------------------------------------- */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  width: 100%;
+  background: var(--nav-backdrop);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background 0.4s ease, border-color 0.4s ease;
+}
+
+.navbar-container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 1rem 2.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Links: Day/Night Switch */
+.nav-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+}
+
+.theme-toggle-wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.15em;
+}
+
+.toggle-label {
+  color: var(--text-muted);
+  transition: color 0.3s ease;
+}
+
+[data-theme="light"] .day-label {
+  color: var(--text-primary);
+  font-weight: 700;
+}
+
+[data-theme="dark"] .night-label {
+  color: var(--accent-gold);
+  font-weight: 700;
+}
+
+.theme-switch {
+  width: 48px;
+  height: 24px;
+  background-color: var(--switch-bg);
+  border-radius: 999px;
+  position: relative;
+  border: 1px solid var(--border-subtle);
+  transition: background-color 0.3s ease;
+}
+
+.switch-handle {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: var(--switch-handle);
+  position: absolute;
+  top: 2px;
+  left: var(--toggle-pos);
+  transition: left 0.35s cubic-bezier(0.16, 1, 0.3, 1), background-color 0.3s ease;
+}
+
+/* Mitte: Meister Yoda Siegel */
+.nav-center {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--text-primary);
+}
+
+.emblem-svg {
+  width: 40px;
+  height: 40px;
+  color: var(--text-primary);
+  transition: transform 0.4s ease;
+}
+
+.brand-logo:hover .emblem-svg {
+  transform: rotate(45deg);
+}
+
+.brand-name {
+  display: flex;
+  flex-direction: column;
+  line-height: 1;
+}
+
+.brand-title {
+  font-family: var(--font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.22em;
+  font-weight: 500;
+}
+
+.brand-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.55rem;
+  letter-spacing: 0.35em;
+  color: var(--accent-gold);
+  margin-top: 0.2rem;
+}
+
+/* Rechts: Controls & Menü */
+.nav-right {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.nav-icon-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--text-secondary);
+  padding: 0.4rem 0.75rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-subtle);
+  transition: var(--transition-fast);
+}
+
+.nav-icon-btn:hover, .nav-icon-btn.active {
+  color: var(--accent-gold);
+  border-color: var(--accent-gold);
+}
+
+.sound-wave {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  height: 12px;
+}
+
+.sound-wave i {
+  display: block;
+  width: 2px;
+  height: 6px;
+  background-color: currentColor;
+  border-radius: 1px;
+  transition: height 0.2s ease;
+}
+
+.nav-icon-btn.active .sound-wave i:nth-child(1) { animation: wave 0.8s infinite ease-in-out; }
+.nav-icon-btn.active .sound-wave i:nth-child(2) { animation: wave 0.8s infinite ease-in-out 0.2s; }
+.nav-icon-btn.active .sound-wave i:nth-child(3) { animation: wave 0.8s infinite ease-in-out 0.4s; }
+.nav-icon-btn.active .sound-wave i:nth-child(4) { animation: wave 0.8s infinite ease-in-out 0.1s; }
+
+@keyframes wave {
+  0%, 100% { height: 4px; }
+  50% { height: 14px; }
+}
+
+.nav-cta {
+  padding: 0.55rem 1.25rem;
+}
+
+.menu-burger-btn {
+  color: var(--text-primary);
+  padding: 0.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.menu-burger-btn:hover {
+  transform: scale(1.1);
+}
+
+/* --------------------------------------------------------------------------
+   6. HERO SECTION (DAS ESTELLE SCOTTSDALE MEISTERWERK)
+   Zentrierter Text, gerahmt von 4 versetzten Floating Panels
+   -------------------------------------------------------------------------- */
+.hero-section {
+  position: relative;
+  min-height: 94vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 1.5rem;
+  overflow: hidden;
+}
+
+/* 4 Schwebende Asymmetrische Visual-Cards */
+.hero-visual-wrapper {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-visual {
+  position: absolute;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-radius: 2px;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.18);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+  pointer-events: auto;
+}
+
+.hero-visual:hover {
+  box-shadow: 0 32px 64px rgba(0, 0, 0, 0.28);
+  transform: translateY(-6px) scale(1.02) !important;
+}
+
+/* Bildkarten-Beschriftung (Estelle Monospace Detail) */
+.visual-caption {
+  position: absolute;
+  bottom: 0.75rem;
+  left: 0.75rem;
+  background: rgba(13, 19, 12, 0.75);
+  color: #FAF6EE;
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.2em;
+  padding: 0.35rem 0.65rem;
+  backdrop-filter: blur(8px);
+  border-radius: 1px;
+}
+
+/* Positionen der 4 Visual Panels (Estelle Scottsdale Layout) */
+.visual-top-left {
+  top: 8%;
+  left: 4%;
+  width: 22%;
+  height: 380px;
+  max-width: 320px;
+}
+
+.visual-bottom-left {
+  bottom: 6%;
+  left: 7%;
+  width: 19%;
+  height: 320px;
+  max-width: 270px;
+}
+
+.visual-top-right {
+  top: 7%;
+  right: 4%;
+  width: 23%;
+  height: 400px;
+  max-width: 330px;
+}
+
+.visual-bottom-right {
+  bottom: 8%;
+  right: 6%;
+  width: 21%;
+  height: 340px;
+  max-width: 290px;
+}
+
+/* Zentrierter Editorial Text */
+.hero-text-container {
+  position: relative;
+  z-index: 10;
+  max-width: 680px;
+  margin: 0 auto;
+  text-align: center;
+  pointer-events: auto;
+  padding: 2.5rem 2rem;
+  background: radial-gradient(ellipse at center, var(--bg-primary) 55%, transparent 100%);
+  border-radius: 16px;
+}
+
+.hero-quote-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2.2rem;
+}
+
+.hero-stanza {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 2.2vw, 1.55rem);
+  line-height: 1.8;
+  color: var(--text-primary);
+  letter-spacing: 0.015em;
+  font-weight: 400;
+}
+
+.day-night-phrase strong {
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+  letter-spacing: 0.12em;
+  color: var(--accent-gold);
+  font-weight: 700;
+}
+
+.highlight-stanza {
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  font-style: italic;
+  color: var(--accent-gold);
+  font-weight: 500;
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 1rem;
+  flex-wrap: wrap;
+}
+
+.hero-btn {
+  padding: 1rem 2.25rem;
+  font-size: 0.82rem;
+}
+
+.hero-btn-sub {
+  padding: 1rem 2rem;
+}
+
+.hero-scroll-indicator {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-muted);
+}
+
+.scroll-mouse {
+  width: 20px;
+  height: 32px;
+  border: 1px solid var(--text-muted);
+  border-radius: 999px;
+  position: relative;
+}
+
+.scroll-wheel {
+  width: 2px;
+  height: 6px;
+  background-color: var(--accent-gold);
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 2px;
+  animation: scrollAnim 1.8s infinite ease-in-out;
+}
+
+@keyframes scrollAnim {
+  0% { transform: translate(-50%, 0); opacity: 1; }
+  100% { transform: translate(-50%, 12px); opacity: 0; }
+}
+
+.scroll-text {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  letter-spacing: 0.25em;
+}
+
+/* --------------------------------------------------------------------------
+   7. INTERAKTIVE ATEM-MEDITATION (THE LIVING FORCE BREATH)
+   -------------------------------------------------------------------------- */
+.breath-section {
+  padding: 8rem 0;
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  position: relative;
+  transition: background-color 0.5s ease;
+}
+
+.breath-interactive-card {
+  max-width: 780px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  padding: 4rem 3rem;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* Atemkreis mit pulsierendem Glow */
+.breath-circle-container {
+  position: relative;
+  width: 280px;
+  height: 280px;
+  margin-bottom: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.breath-aura {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--accent-green-glow) 0%, transparent 70%);
+  transform: scale(0.8);
+  transition: transform 4s ease-in-out, opacity 4s ease-in-out;
+  opacity: 0.3;
+}
+
+.breath-ring-outer {
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  border: 1px dashed var(--border-subtle);
+  animation: slowSpin 30s linear infinite;
+}
+
+@keyframes slowSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.breath-ring-inner {
+  width: 170px;
+  height: 170px;
+  border-radius: 50%;
+  background: var(--bg-primary);
+  border: 2px solid var(--text-primary);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  transition: transform 4s cubic-bezier(0.45, 0.05, 0.55, 0.95), border-color 0.4s ease;
+  z-index: 2;
+}
+
+/* Animationsphasen der Atmung */
+.breath-active.inhale .breath-ring-inner {
+  transform: scale(1.35);
+  border-color: var(--accent-green);
+}
+.breath-active.inhale .breath-aura {
+  transform: scale(1.5);
+  opacity: 0.9;
+}
+
+.breath-active.hold-in .breath-ring-inner {
+  transform: scale(1.35);
+  border-color: var(--accent-gold);
+}
+.breath-active.hold-in .breath-aura {
+  transform: scale(1.5);
+  opacity: 0.7;
+}
+
+.breath-active.exhale .breath-ring-inner {
+  transform: scale(0.9);
+  border-color: var(--text-secondary);
+}
+.breath-active.exhale .breath-aura {
+  transform: scale(0.7);
+  opacity: 0.2;
+}
+
+.breath-active.hold-out .breath-ring-inner {
+  transform: scale(0.9);
+  border-color: var(--border-subtle);
+}
+.breath-active.hold-out .breath-aura {
+  transform: scale(0.6);
+  opacity: 0.1;
+}
+
+.breath-phase-text {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.2em;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.2rem;
+}
+
+.breath-timer {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  line-height: 1;
+  font-weight: 300;
+  color: var(--accent-gold);
+}
+
+.breath-instruction-box {
+  margin-bottom: 2.5rem;
+  max-width: 540px;
+  position: relative;
+}
+
+.instruction-quote-mark {
+  font-family: var(--font-display);
+  font-size: 3.5rem;
+  line-height: 0.5;
+  color: var(--accent-gold);
+  opacity: 0.3;
+  margin-bottom: 0.5rem;
+}
+
+.instruction-text {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  line-height: 1.6;
+  color: var(--text-primary);
+  font-style: italic;
+  min-height: 60px;
+}
+
+.instruction-author {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.25em;
+  color: var(--accent-gold);
+  margin-top: 0.75rem;
+}
+
+.breath-controls {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  margin-bottom: 2.5rem;
+}
+
+.breath-btn {
+  padding: 0.9rem 2.2rem;
+}
+
+.breath-metrics {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2.5rem;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 2rem;
+  width: 100%;
+}
+
+.metric-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.metric-num {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  font-weight: 400;
+  color: var(--accent-gold);
+  line-height: 1;
+}
+
+.metric-label {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.2em;
+  color: var(--text-muted);
+  margin-top: 0.4rem;
+}
+
+.metric-divider {
+  width: 1px;
+  height: 32px;
+  background-color: var(--border-subtle);
+}
+
+/* --------------------------------------------------------------------------
+   8. DREI SÄULEN (ESTELLE SCOTTSDALE GRID LAYOUT)
+   -------------------------------------------------------------------------- */
+.pillars-section {
+  padding: 8rem 0;
+  background-color: var(--bg-primary);
+}
+
+.pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3.5rem 3rem;
+}
+
+.pillar-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--card-bg);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  transition: transform 0.4s ease, border-color 0.4s ease;
+}
+
+.pillar-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--accent-gold);
+}
+
+.pillar-image-wrap {
+  position: relative;
+  height: 380px;
+  overflow: hidden;
+}
+
+.pillar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pillar-card:hover .pillar-img {
+  transform: scale(1.05);
+}
+
+.pillar-badge {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.2em;
+  padding: 0.4rem 0.8rem;
+  background: rgba(13, 19, 12, 0.8);
+  color: #FAF6EE;
+  backdrop-filter: blur(8px);
+}
+
+.pillar-content {
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.pillar-title {
+  font-family: var(--font-display);
+  font-size: 1.9rem;
+  line-height: 1.25;
+  font-weight: 400;
+  margin-bottom: 0.4rem;
+  color: var(--text-primary);
+}
+
+.pillar-subtitle {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.16em;
+  color: var(--accent-gold);
+  margin-bottom: 1.25rem;
+  text-transform: uppercase;
+}
+
+.pillar-text {
+  font-size: 0.98rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 1.75rem;
+}
+
+.pillar-quote {
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-subtle);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--accent-gold);
+}
+
+/* --------------------------------------------------------------------------
+   9. INTERAKTIVES YODA ORAKEL (KONTEMPLATIONS-STEIN)
+   -------------------------------------------------------------------------- */
+.oracle-section {
+  padding: 6rem 0 8rem;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.oracle-card {
+  max-width: 820px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border: 1px solid var(--border-strong);
+  border-radius: 6px;
+  padding: 4.5rem 3.5rem;
+  box-shadow: var(--card-shadow);
+  text-align: center;
+  backdrop-filter: blur(16px);
+}
+
+.oracle-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 300;
+  margin-bottom: 0.75rem;
+}
+
+.oracle-desc {
+  color: var(--text-secondary);
+  font-size: 1rem;
+  max-width: 580px;
+  margin: 0 auto 3rem;
+}
+
+.oracle-display {
+  background: var(--bg-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: 4px;
+  padding: 3rem 2.5rem;
+  margin-bottom: 2.5rem;
+  transition: var(--transition-smooth);
+}
+
+.oracle-symbol {
+  color: var(--accent-gold);
+  margin-bottom: 1.5rem;
+}
+
+.oracle-quote {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  line-height: 1.4;
+  font-style: italic;
+  color: var(--text-primary);
+  margin-bottom: 1.25rem;
+  transition: opacity 0.3s ease;
+}
+
+.oracle-guidance {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.65;
+  transition: opacity 0.3s ease;
+}
+
+.oracle-btn {
+  padding: 1rem 2.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   10. SANCTUARY & WEB AUDIO SOUND ENGINE
+   -------------------------------------------------------------------------- */
+.sanctuary-section {
+  position: relative;
+  padding: 9rem 0;
+  overflow: hidden;
+  color: #FAF6EE;
+  text-align: center;
+}
+
+.sanctuary-bg-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.05);
+  filter: brightness(0.4) saturate(0.9);
+  z-index: 1;
+}
+
+.sanctuary-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(13, 19, 12, 0.75) 0%, rgba(13, 19, 12, 0.9) 100%);
+  z-index: 2;
+}
+
+.sanctuary-content {
+  position: relative;
+  z-index: 3;
+  max-width: 860px;
+}
+
+.sanctuary-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4.5vw, 3.8rem);
+  font-weight: 300;
+  margin-bottom: 1.25rem;
+}
+
+.sanctuary-text {
+  font-size: 1.1rem;
+  color: #CBD5C0;
+  line-height: 1.7;
+  margin-bottom: 3rem;
+  font-family: var(--font-display);
+  font-style: italic;
+}
+
+.soundscape-panel {
+  background: rgba(20, 28, 18, 0.75);
+  border: 1px solid rgba(247, 244, 235, 0.2);
+  border-radius: 6px;
+  padding: 2.5rem;
+  backdrop-filter: blur(16px);
+  max-width: 680px;
+  margin: 0 auto;
+}
+
+.sound-tracks {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.sound-track-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1.25rem;
+  border: 1px solid rgba(247, 244, 235, 0.2);
+  border-radius: 4px;
+  color: #FAF6EE;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  transition: var(--transition-fast);
+}
+
+.sound-track-btn.active, .sound-track-btn:hover {
+  background: var(--accent-gold);
+  color: #1C2717;
+  border-color: var(--accent-gold);
+}
+
+.sound-playback-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(247, 244, 235, 0.15);
+  flex-wrap: wrap;
+}
+
+.play-master-btn {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  padding: 0.8rem 1.8rem;
+  background: #FAF6EE;
+  color: #1C2717;
+  font-weight: 700;
+  border-radius: 2px;
+  transition: var(--transition-fast);
+}
+
+.play-master-btn:hover {
+  background: var(--accent-gold);
+}
+
+.volume-slider-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.vol-label {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  color: #A2AD97;
+}
+
+#volume-control {
+  -webkit-appearance: none;
+  width: 120px;
+  height: 4px;
+  background: rgba(247, 244, 235, 0.3);
+  border-radius: 2px;
+  outline: none;
+}
+
+#volume-control::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--accent-gold);
+  cursor: pointer;
+}
+
+/* --------------------------------------------------------------------------
+   11. FULLSCREEN OVERLAY MENU (ESTELLE SCOTTSDALE STYLE)
+   -------------------------------------------------------------------------- */
+.menu-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  display: flex;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s ease;
+  overflow-y: auto;
+}
+
+.menu-overlay.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.menu-container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 4rem 3rem 3rem;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  grid-template-rows: 1fr auto;
+  gap: 3rem;
+  min-height: 100vh;
+}
+
+.menu-preview-wrapper {
+  position: relative;
+  width: 100%;
+  height: 75vh;
+  border-radius: 4px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--card-shadow);
+}
+
+.menu-preview-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transform: scale(1.08);
+  transition: opacity 0.6s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.menu-preview-image.active {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.menu-nav-links {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.menu-nav-item {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: 1.25rem;
+  transition: var(--transition-fast);
+}
+
+.menu-index {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--accent-gold);
+  letter-spacing: 0.1em;
+}
+
+.menu-link {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 4.5vw, 3.8rem);
+  line-height: 1.1;
+  font-weight: 300;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.menu-nav-item:hover .menu-link {
+  transform: translateX(12px);
+  color: var(--accent-gold);
+}
+
+.menu-footer {
+  grid-column: 1 / -1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border-subtle);
+  padding-top: 2rem;
+}
+
+.menu-quote {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-style: italic;
+  color: var(--text-secondary);
+}
+
+.close-menu-btn {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  letter-spacing: 0.2em;
+  padding: 0.75rem 1.5rem;
+  border: 1px solid var(--text-primary);
+  transition: var(--transition-fast);
+}
+
+.close-menu-btn:hover {
+  background: var(--text-primary);
+  color: var(--bg-primary);
+}
+
+/* --------------------------------------------------------------------------
+   12. FOOTER
+   -------------------------------------------------------------------------- */
+.footer {
+  padding: 6rem 0 3rem;
+  background-color: var(--bg-secondary);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.footer-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 4rem;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+}
+
+.footer-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  letter-spacing: 0.15em;
+  font-weight: 500;
+}
+
+.footer-sub {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer-nav a {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+}
+
+.footer-nav a:hover {
+  color: var(--accent-gold);
+}
+
+.footer-divider {
+  height: 1px;
+  background-color: var(--border-subtle);
+  margin-bottom: 2.5rem;
+}
+
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.footer-quote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 1.15rem;
+  color: var(--accent-gold);
+}
+
+/* --------------------------------------------------------------------------
+   13. RESPONSIVE MEDIA QUERIES
+   -------------------------------------------------------------------------- */
+@media screen and (max-width: 1200px) {
+  .visual-top-left { width: 20%; height: 320px; left: 2%; }
+  .visual-bottom-left { width: 18%; height: 280px; left: 4%; }
+  .visual-top-right { width: 20%; height: 340px; right: 2%; }
+  .visual-bottom-right { width: 19%; height: 300px; right: 4%; }
+}
+
+@media screen and (max-width: 991px) {
+  .hero-section {
+    min-height: auto;
+    padding: 6rem 1.5rem 4rem;
+  }
+
+  /* Auf Tablets: Visuals sanfter anordnen, damit Text im Fokus bleibt */
+  .visual-top-left { width: 28%; height: 260px; top: 2%; left: 2%; opacity: 0.45; }
+  .visual-top-right { width: 28%; height: 260px; top: 2%; right: 2%; opacity: 0.45; }
+  .visual-bottom-left { display: none; }
+  .visual-bottom-right { display: none; }
+
+  .hero-text-container {
+    padding: 3rem 1.5rem;
+    background: transparent;
+  }
+
+  .pillars-grid {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .menu-container {
+    grid-template-columns: 1fr;
+  }
+
+  .menu-preview-wrapper {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .navbar-container {
+    padding: 0.85rem 1.25rem;
+  }
+
+  .nav-cta {
+    display: none;
+  }
+
+  .brand-title {
+    font-size: 1.15rem;
+  }
+
+  .hero-stanza {
+    font-size: 1.2rem;
+  }
+
+  .breath-circle-container {
+    width: 220px;
+    height: 220px;
+  }
+
+  .breath-ring-outer {
+    width: 210px;
+    height: 210px;
+  }
+
+  .breath-ring-inner {
+    width: 140px;
+    height: 140px;
+  }
+
+  .breath-interactive-card {
+    padding: 2.5rem 1.5rem;
+  }
+
+  .soundscape-panel {
+    padding: 1.5rem;
+  }
+
+  .sound-playback-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 1.25rem;
+  }
+
+  .play-master-btn {
+    text-align: center;
+  }
+
+  .volume-slider-wrap {
+    justify-content: space-between;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

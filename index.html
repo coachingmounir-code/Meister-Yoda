@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="de" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Meister Yoda | Der Meditations-Guide – Die Kunst der inneren Stille</title>
+  <meta name="description" content="Finde tiefe innere Ruhe und geistige Klarheit mit Meister Yoda. Eine ästhetische Meditations-Erfahrung inspiriert von zeitloser Weisheit und moderner Achtsamkeit.">
+  
+  <!-- Preconnect & Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="body-theme">
+
+  <!-- ========================================================
+       FULLSCREEN OVERLAY MENU (Inspiriert von Estelle Scottsdale)
+       ======================================================== -->
+  <div id="menu-overlay" class="menu-overlay" aria-hidden="true">
+    <div class="menu-container">
+      <div class="menu-preview-wrapper">
+        <div class="menu-preview-image active" id="menu-preview-1" style="background-image: url('assets/images/yoda-statue.jpg');"></div>
+        <div class="menu-preview-image" id="menu-preview-2" style="background-image: url('assets/images/floating-stones.jpg');"></div>
+        <div class="menu-preview-image" id="menu-preview-3" style="background-image: url('assets/images/ancient-grove.jpg');"></div>
+        <div class="menu-preview-image" id="menu-preview-4" style="background-image: url('assets/images/force-hands.jpg');"></div>
+        <div class="menu-preview-image" id="menu-preview-5" style="background-image: url('assets/images/zen-sanctuary.jpg');"></div>
+      </div>
+
+      <nav class="menu-nav-links">
+        <div class="menu-nav-item" data-preview="menu-preview-1">
+          <span class="menu-index">01</span>
+          <a href="#hero" class="menu-link">Der Pfad</a>
+        </div>
+        <div class="menu-nav-item" data-preview="menu-preview-2">
+          <span class="menu-index">02</span>
+          <a href="#breath-meditation" class="menu-link">Die Atemlehre</a>
+        </div>
+        <div class="menu-nav-item" data-preview="menu-preview-3">
+          <span class="menu-index">03</span>
+          <a href="#pillars" class="menu-link">Drei Säulen</a>
+        </div>
+        <div class="menu-nav-item" data-preview="menu-preview-4">
+          <span class="menu-index">04</span>
+          <a href="#oracle" class="menu-link">Yodas Orakel</a>
+        </div>
+        <div class="menu-nav-item" data-preview="menu-preview-5">
+          <span class="menu-index">05</span>
+          <a href="#sanctuary" class="menu-link">Zuflucht der Stille</a>
+        </div>
+      </nav>
+
+      <div class="menu-footer">
+        <div class="menu-quote">„Größe bedeutet nichts. Die Macht mein Verbündeter ist.“</div>
+        <button id="close-menu-btn" class="close-menu-btn" aria-label="Menü schließen">SCHLIESSEN ✕</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       TOP MURAL BANNER (Estelle "Meet Estelle" Art Intro)
+       ======================================================== -->
+  <header class="mural-banner">
+    <div class="mural-content">
+      <div class="mural-eyebrow">DIE KUNST DES LOSLASSENS</div>
+      <div class="mural-title">
+        <span class="mural-word">BEGEGNE</span>
+        <span class="mural-word font-italic">DEM MEISTER</span>
+      </div>
+      <div class="mural-tagline">EIN ERWACHEN IM ZEICHEN DER LEBENDIGEN MACHT</div>
+    </div>
+  </header>
+
+  <!-- ========================================================
+       STICKY LUXURY NAVIGATION (Estelle Layout)
+       ======================================================== -->
+  <nav class="navbar" id="navbar">
+    <div class="navbar-container">
+      
+      <!-- Links: Day/Night Toggle -->
+      <div class="nav-left">
+        <div class="theme-toggle-wrapper">
+          <span class="toggle-label day-label" id="label-day">TAG</span>
+          <button class="theme-switch" id="theme-switch" aria-label="Tag und Nachtmodus wechseln" role="switch" aria-checked="false">
+            <span class="switch-handle"></span>
+          </button>
+          <span class="toggle-label night-label" id="label-night">NACHT</span>
+        </div>
+      </div>
+
+      <!-- Mitte: Meister Yoda Meditations-Siegel -->
+      <div class="nav-center">
+        <a href="#hero" class="brand-logo" aria-label="Zurück zum Anfang">
+          <svg class="emblem-svg" viewBox="0 0 100 100" fill="currentColor" aria-hidden="true">
+            <!-- Stilisierte Zen-Kreise & Yoda-Silhouette-Siegel -->
+            <circle cx="50" cy="50" r="46" stroke="currentColor" stroke-width="1.2" fill="none" opacity="0.6"/>
+            <circle cx="50" cy="50" r="42" stroke="currentColor" stroke-width="0.8" stroke-dasharray="3 3" fill="none" opacity="0.4"/>
+            <!-- Meditations-Lotus & Ohren-Ikone -->
+            <path d="M50 24 C54 36 64 42 76 45 C64 48 54 54 50 68 C46 54 36 48 24 45 C36 42 46 36 50 24 Z" fill="currentColor" opacity="0.85"/>
+            <path d="M22 45 C14 38 6 42 4 48 C10 50 18 48 22 45 Z" fill="currentColor"/>
+            <path d="M78 45 C86 38 94 42 96 48 C90 50 82 48 78 45 Z" fill="currentColor"/>
+            <circle cx="50" cy="74" r="2.5" fill="currentColor"/>
+          </svg>
+          <div class="brand-name">
+            <span class="brand-title">YODA</span>
+            <span class="brand-subtitle">MEDITATION</span>
+          </div>
+        </a>
+      </div>
+
+      <!-- Rechts: Audio Soundscape & Action CTA + Menü-Button -->
+      <div class="nav-right">
+        <button id="soundscape-btn" class="nav-icon-btn" aria-label="Klangkulisse ein-/ausschalten" title="Klangkulisse umschalten">
+          <span class="sound-wave">
+            <i></i><i></i><i></i><i></i>
+          </span>
+          <span class="sound-text">KLANG</span>
+        </button>
+
+        <a href="#breath-meditation" class="primary-button nav-cta">ATMEN</a>
+
+        <button id="open-menu-btn" class="menu-burger-btn" aria-label="Menü öffnen">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+            <line x1="3" y1="7" x2="21" y2="7"></line>
+            <line x1="8" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="17" x2="21" y2="17"></line>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </nav>
+
+  <main id="main-content">
+    
+    <!-- ========================================================
+         HERO SECTION (Exakt nach Estelle Scottsdale Architektur)
+         Zentrierter poetischer Textblock gerahmt von 4 versetzten
+         schwebenden Visual-Cards mit Parallax-Effekt.
+         ======================================================== -->
+    <section class="hero-section" id="hero">
+      
+      <!-- 4 Asymmetrische Floating Visual Panels (Estelle Scottsdale Layout) -->
+      <div class="hero-visual-wrapper" aria-hidden="true">
+        <!-- Panel 1: Oben links - Meister Yoda Skulptur im Dhyana-Sitz -->
+        <div class="hero-visual visual-top-left" data-speed="0.08" style="background-image: url('assets/images/yoda-statue.jpg');">
+          <div class="visual-caption">I. DER MEISTER</div>
+        </div>
+
+        <!-- Panel 2: Unten links - Uralter Dagobah-Hain mit Lichtstrahlen -->
+        <div class="hero-visual visual-bottom-left" data-speed="-0.05" style="background-image: url('assets/images/ancient-grove.jpg');">
+          <div class="visual-caption">II. DIE ZUFLUCHT</div>
+        </div>
+
+        <!-- Panel 3: Oben rechts - Schwebende Kiesel im Gleichgewicht -->
+        <div class="hero-visual visual-top-right" data-speed="0.12" style="background-image: url('assets/images/floating-stones.jpg');">
+          <div class="visual-caption">III. SCHWERELOS</div>
+        </div>
+
+        <!-- Panel 4: Unten rechts - Hände mit leuchtender Lebensmacht -->
+        <div class="hero-visual visual-bottom-right" data-speed="-0.09" style="background-image: url('assets/images/force-hands.jpg');">
+          <div class="visual-caption">IV. DIE LEBENDIGE MACHT</div>
+        </div>
+      </div>
+
+      <!-- Zentrierter Poetischer Editorial-Textblock (Estelle Style) -->
+      <div class="hero-text-container">
+        <div class="hero-quote-block">
+          
+          <p class="hero-stanza u-fade-in delay-1">
+            Nicht bloß eine Übung dies ist.<br>
+            Ein Erwachen im tiefen Kern des Seins.<br>
+            Zwei Welten. Die innere Stille und die lebendige Macht.<br>
+            Erbaut für vollkommene geistige Klarheit.
+          </p>
+
+          <p class="hero-stanza u-fade-in delay-2">
+            Ein Raum, der sich mit deinem Atem bewegt,<br>
+            nicht vor dir, nicht hinter dir.<br>
+            <span class="day-night-phrase">
+              <strong>Bei Tag:</strong> Klarer Geist, weites Licht, müheloses Sein.<br>
+              <strong>Bei Nacht:</strong> Die Sterne sprechen. Der Lärm verblasst. Eins du wirst.
+            </span>
+          </p>
+
+          <p class="hero-stanza u-fade-in delay-3">
+            Geduld du haben musst.<br>
+            Verlernen, was du einst gelernt hast.<br>
+            Kein Versuchen existiert hier.
+          </p>
+
+          <p class="hero-stanza highlight-stanza u-fade-in delay-4">
+            Ein Pfad, der dich nicht belehren will —<br>
+            sondern dich sanft an dein wahres Wesen erinnert.
+          </p>
+
+          <div class="hero-actions u-fade-in delay-5">
+            <a href="#breath-meditation" class="primary-button hero-btn">DEN PFAD BESCHREITEN</a>
+            <a href="#oracle" class="secondary-button hero-btn-sub">WEISHEIT EMPFANGEN</a>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="hero-scroll-indicator">
+        <span class="scroll-mouse">
+          <span class="scroll-wheel"></span>
+        </span>
+        <span class="scroll-text">HINABSTEIGEN IN DIE STILLE</span>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         INTERAKTIVE ATEM-MEDITATION (The Living Force Breath)
+         Box Breathing / 4-4-4-4 geführter meditativer Rhythmus
+         ======================================================== -->
+    <section class="breath-section" id="breath-meditation">
+      <div class="container">
+        
+        <div class="section-header text-center">
+          <span class="section-tag">PRAXIS DER ACHTSAMKEIT</span>
+          <h2 class="section-title">Die Atmung der lebendigen Macht</h2>
+          <p class="section-desc">
+            „Fühle die Macht um dich herum. Zwischen dir, mir, dem Baum, dem Stein... überall sie ist.“
+          </p>
+        </div>
+
+        <div class="breath-interactive-card">
+          
+          <!-- Visueller Atemkreis -->
+          <div class="breath-circle-container">
+            <div class="breath-aura" id="breath-aura"></div>
+            <div class="breath-ring-outer"></div>
+            <div class="breath-ring-inner" id="breath-circle">
+              <div class="breath-phase-text" id="breath-phase">BEREIT?</div>
+              <div class="breath-timer" id="breath-counter">4</div>
+            </div>
+          </div>
+
+          <!-- Yodas meditative Anweisung -->
+          <div class="breath-instruction-box">
+            <div class="instruction-quote-mark">“</div>
+            <p class="instruction-text" id="breath-guidance">
+              Klicke auf Beginn. Schließe sanft die Augen oder lasse den Blick weich werden. Folge dem Puls der Macht.
+            </p>
+            <div class="instruction-author">— MEISTER YODA</div>
+          </div>
+
+          <!-- Steuerungselemente -->
+          <div class="breath-controls">
+            <button class="primary-button breath-btn" id="start-breath-btn">ATEMÜBUNG STARTEN</button>
+            <button class="ghost-button" id="reset-breath-btn">ZURÜCKSETZEN</button>
+          </div>
+
+          <!-- Zähler für abgeschlossene Zyklen -->
+          <div class="breath-metrics">
+            <div class="metric-item">
+              <span class="metric-num" id="cycle-count">0</span>
+              <span class="metric-label">ABGESCHLOSSENE ZYKLEN</span>
+            </div>
+            <div class="metric-divider"></div>
+            <div class="metric-item">
+              <span class="metric-num" id="breath-minutes">0:00</span>
+              <span class="metric-label">ZEIT IN DER STILLE</span>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         DREI SÄULEN DER MEDITATION (Estelle Experience 2-Col Grid)
+         ======================================================== -->
+    <section class="pillars-section" id="pillars">
+      <div class="container">
+        
+        <div class="section-header">
+          <span class="section-tag">LEHRE DES MEISTERS</span>
+          <h2 class="section-title">Drei Säulen für den ruhenden Geist</h2>
+          <p class="section-desc">
+            Wie Meister Yoda die uralten Prinzipien der Jedi-Meditation in eine weltliche, zeitlose Achtsamkeitspraxis verwandelt.
+          </p>
+        </div>
+
+        <div class="pillars-grid">
+          
+          <!-- Säule 1 -->
+          <article class="pillar-card">
+            <div class="pillar-image-wrap">
+              <img src="assets/images/zen-sanctuary.jpg" alt="Minimalistische Meditationskammer mit Wasserbecken und Sonnenlicht" loading="lazy" class="pillar-img">
+              <div class="pillar-badge">SÄULE I</div>
+            </div>
+            <div class="pillar-content">
+              <h3 class="pillar-title">Verlernen, was du gelernt hast</h3>
+              <div class="pillar-subtitle">Kognitive Entlastung & Loslassen</div>
+              <p class="pillar-text">
+                Der Geist füllt sich täglich mit Urteilen, Ängsten und starren Vorstellungen. Yoda lehrt uns das radikale Nicht-Wissen: Die Fähigkeit, den Moment ohne Vorurteil und ohne Zwang zu betrachten. Nur ein leeres Gefäß kann neues Wasser fassen.
+              </p>
+              <div class="pillar-quote">„Befreie deinen Geist von dem, was du glaubst zu müssen.“</div>
+            </div>
+          </article>
+
+          <!-- Säule 2 -->
+          <article class="pillar-card">
+            <div class="pillar-image-wrap">
+              <img src="assets/images/force-hands.jpg" alt="Hände halten sanft leuchtende Energie im Einklang" loading="lazy" class="pillar-img">
+              <div class="pillar-badge">SÄULE II</div>
+            </div>
+            <div class="pillar-content">
+              <h3 class="pillar-title">Die lebendige Macht im Hier & Jetzt</h3>
+              <div class="pillar-subtitle">Somatische Achtsamkeit & Verbundenheit</div>
+              <p class="pillar-text">
+                Nicht in der fernen Zukunft, noch in der Reue der Vergangenheit existiert das Leben. Die Macht durchdringt jede Zelle deines Körpers genau in dieser Sekunde. Indem du deine Sinne für den Atem, die Temperatur und den Herzschlag öffnest, kehrst du heim.
+              </p>
+              <div class="pillar-quote">„Immer in die Zukunft geblickt du hast. Nie im Hier gewesen dein Sinn.“</div>
+            </div>
+          </article>
+
+          <!-- Säule 3 -->
+          <article class="pillar-card">
+            <div class="pillar-image-wrap">
+              <img src="assets/images/floating-stones.jpg" alt="Schwebende Zen-Steine über spiegelglattem Wasser" loading="lazy" class="pillar-img">
+              <div class="pillar-badge">SÄULE III</div>
+            </div>
+            <div class="pillar-content">
+              <h3 class="pillar-title">Die Stille hinter den Gedanken</h3>
+              <div class="pillar-subtitle">Transzendenz & Innerer Friede</div>
+              <p class="pillar-text">
+                Gedanken sind wie Blätter auf einem reißenden Fluss auf Dagobah: Du musst nicht auf jedes Blatt springen. Werde zum Ufer. Beobachte das Vorbeiziehen der Gedankenströme, ohne einzugreifen. Was bleibt, ist unerschütterliche Weite.
+              </p>
+              <div class="pillar-quote">„Friedvoll und passiv der Geist sein muss.“</div>
+            </div>
+          </article>
+
+          <!-- Säule 4 (Bonus / Harmonie) -->
+          <article class="pillar-card">
+            <div class="pillar-image-wrap">
+              <img src="assets/images/mystic-master.jpg" alt="Meister in tiefer Naturmeditation im Nebel" loading="lazy" class="pillar-img">
+              <div class="pillar-badge">SÄULE IV</div>
+            </div>
+            <div class="pillar-content">
+              <h3 class="pillar-title">Die Einfachheit der Zuflucht</h3>
+              <div class="pillar-subtitle">Rückzug & Natürlicher Rhythmus</div>
+              <p class="pillar-text">
+                Yoda wählte weder Paläste noch goldene Tempel, sondern die feuchte, lebendige Einfachheit der Sümpfe. Wahre Meditation bedarf keiner kostspieligen Werkzeuge. Ein Sitzplatz, dein Atem und die Bereitschaft zur Stille genügen.
+              </p>
+              <div class="pillar-quote">„Großartiger Krieger? Kriege machen niemanden groß.“</div>
+            </div>
+          </article>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         INTERAKTIVES YODA ORAKEL (Kontemplation des Tages)
+         ======================================================== -->
+    <section class="oracle-section" id="oracle">
+      <div class="container">
+        
+        <div class="oracle-card">
+          <div class="oracle-inner">
+            <span class="section-tag">KONTEMPLATION DES TAGES</span>
+            <h2 class="oracle-title">Befrage den Meister</h2>
+            <p class="oracle-desc">
+              Welche Haltung benötigt dein Geist in dieser Stunde? Berühre den Stein der Weisheit, um Yodas persönlichen Rat für deine Meditation zu empfangen.
+            </p>
+
+            <div class="oracle-display" id="oracle-display">
+              <div class="oracle-symbol">
+                <svg viewBox="0 0 60 60" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.2">
+                  <polygon points="30,5 55,50 5,50"/>
+                  <circle cx="30" cy="35" r="8"/>
+                  <line x1="30" y1="5" x2="30" y2="27"/>
+                </svg>
+              </div>
+              <blockquote class="oracle-quote" id="oracle-text">
+                „Tu es oder tu es nicht. Es gibt kein Versuchen.“
+              </blockquote>
+              <div class="oracle-guidance" id="oracle-meaning">
+                Gib dich der Handlung oder der Stille ganz hin. Das Wort ‚versuchen‘ trägt bereits den Keim des Zweifels in sich.
+              </div>
+            </div>
+
+            <button class="primary-button oracle-btn" id="oracle-trigger-btn">
+              NEUEN IMPULS ERBITTEN
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SANCTUARY & AMBIENT AUDIO PLAYER (Web Audio Soundscape)
+         ======================================================== -->
+    <section class="sanctuary-section" id="sanctuary">
+      <div class="sanctuary-bg-image" style="background-image: url('assets/images/ancient-grove.jpg');"></div>
+      <div class="sanctuary-overlay"></div>
+      
+      <div class="container sanctuary-content">
+        <span class="section-tag tag-light">KOSMISCHE HARMONIE</span>
+        <h2 class="sanctuary-title">Die Klangzuflucht von Dagobah</h2>
+        <p class="sanctuary-text">
+          Lasse den Geist von harmonischen Frequenzen und sanften Naturtönen tragen. Generiert in Echtzeit durch reine Klangmathematik – frei von Ablenkung, abgestimmt auf 432 Hz und beruhigende Alpha-Wellen.
+        </p>
+
+        <div class="soundscape-panel">
+          <div class="sound-tracks">
+            <button class="sound-track-btn active" data-sound="rain">
+              <span class="sound-icon">🌧️</span>
+              <span class="sound-name">Dagobah Regenwald</span>
+            </button>
+            <button class="sound-track-btn" data-sound="bowl">
+              <span class="sound-icon">🔔</span>
+              <span class="sound-name">432 Hz Kyber-Glocke</span>
+            </button>
+            <button class="sound-track-btn" data-sound="drone">
+              <span class="sound-icon">🪐</span>
+              <span class="sound-name">Kosmischer Alpha-Drone</span>
+            </button>
+          </div>
+
+          <div class="sound-playback-bar">
+            <button class="play-master-btn" id="play-master-sound">
+              <span id="play-icon">▶ KLANG STARTEN</span>
+            </button>
+            <div class="volume-slider-wrap">
+              <span class="vol-label">LAUTSTÄRKE</span>
+              <input type="range" id="volume-control" min="0" max="1" step="0.05" value="0.5" aria-label="Lautstärkeregler">
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ========================================================
+       FOOTER (Minimalistischer Luxus)
+       ======================================================== -->
+  <footer class="footer">
+    <div class="container footer-container">
+      
+      <div class="footer-top">
+        <div class="footer-brand">
+          <span class="footer-title">YODA | MEDITATION</span>
+          <p class="footer-sub">Der Pfad der inneren Stille und der lebendigen Macht.</p>
+        </div>
+        
+        <div class="footer-nav">
+          <a href="#hero">Der Pfad</a>
+          <a href="#breath-meditation">Atemlehre</a>
+          <a href="#pillars">Drei Säulen</a>
+          <a href="#oracle">Yodas Orakel</a>
+          <a href="#sanctuary">Klangzuflucht</a>
+        </div>
+      </div>
+
+      <div class="footer-divider"></div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">
+          © 2026 Meister Yoda Meditation Guide. Inspiriert von zeitloser Philosophie und moderner Ästhetik.
+        </p>
+        <p class="footer-quote">
+          „Möge die Stille mit dir sein.“
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
